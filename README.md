@@ -1,6 +1,5 @@
 # Final-Project-INFO201
-**Group member**: Ryan Chiu, Andrew Sun, Eric Ng
-
+**Group member**: Ryan Chiu, Andrew Sun, Eric Ng  
 **Data source**: [Bureau of Economic Analysis Website](https://www.bea.gov/regional/downloadzip.cfm)
 
 ## Project Description
