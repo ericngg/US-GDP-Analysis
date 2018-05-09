@@ -1,0 +1,10 @@
+1/                               The private goods-producing industries consist of agriculture, forestry, fishing, and hunting; mining; construction; and manufacturing.
+2/                               The private services-producing industries consist of utilities; wholesale trade; retail trade; transportation and warehousing, excluding Postal Service; information; finance and insurance; real estate, rental, and leasing; professional, scientific, and technical services; management of companies; administrative and support and waste management and remediation services; educational services; health care and social assistance; arts, entertainment, and recreation; accommodation and food services; and other services (except government and government enterprises).
+Note--                           NAICS Industry detail is based on the 2007 North American Industry Classification System (NAICS).
+(D)                              Not shown in order to avoid the disclosure of confidential information; estimates are included in higher level totals.
+(L)                              Less than $500,000 in nominal or real GDP by state.
+(T)                              The estimate is suppressed to cover corresponding estimate for earnings in state personal income. Estimates for this item are included in the total.
+(NA)                             Not available.
+(NM)                             Not meaningful.
+Note--                           Per capita real GDP statistics for 2010-2017 reflect Census Bureau midyear population estimates available as of December 2017.
+                                 Last updated: May 4, 2018 -- new statistics for 2017; revised statistics for 2010-2016.
