@@ -8,5 +8,5 @@ Through analyzing and visualizing the data, we hope to provide an insight of the
 For example, how does the U.S. economic performance differ geographically? How did the U.S. economy develop over time?
 
 
-##Technical description
+## Technical description
 This dataset is a static csv file but not a live data (api) since GDP is difficult to be provided timely by its nature.
