@@ -11,5 +11,7 @@ For example, how does the U.S. economic performance differ geographically? How d
 ## Technical description
 This dataset is a static csv file but not a live data (api) since GDP is difficult to be provided timely by its nature.
 The dataset can be filtered out depending on what the user wants to view. The dataset can be filtered by specific year, by states or region, by component, by industry, etc.
-Libraries that will or potentially be used: shiny, readxl, ggplot2, plotly, RColorBrewer
-Some challenges that we anticipate are formating the UI, deciding the interactivity for the user,  
+
+**Libraries that will or potentially be used:** shiny, readxl, ggplot2, plotly, RColorBrewer, htmlwidgets, and many data wrangling libraries
+
+**Challenges that we anticipate:** Formating the UI, interactivity of the map for the user, and being able to manipulate the data to make it informative.
