@@ -7,9 +7,9 @@ The dataset we are going to work on is the **Annual Gross Domestic Product (GDP)
 
 Through analyzing and visualizing the data, we hope to provide an **insight into the U.S. historical & current economic condition**, for the _general pubic_ who might be interested in the U.S. economy.
 
-Additionally, we will sort out the *TOP 3 industries with highest GDP* in each region, by which we can target audiences who are equipped with more economic knowledge and want to understand the economic trend in each state.
+Additionally, we will sort out the **TOP 3 industries with highest GDP** in each region, by which we can target _audiences who are equipped with more economic knowledge_ and want to understand the economic trend in each state.
 
-The following sample questions can arise:   
+The **following sample questions** can arise:   
 1.) How does the U.S. economic performance differ geographically?    
 2.) How did the U.S. economy develop over time? By which industry?   
 3.) What historical incidents correspond with certain ups and downs in the U.S. economy?
