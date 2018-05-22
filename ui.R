@@ -18,13 +18,16 @@ my_ui <- navbarPage("U.S. Overall Gross Domestic Product Report",
                     ),
           #Panel 2 - Ryan
                   tabPanel(
-                    titlePanel("latest Regional Analysis"),
+                    titlePanel("Latest Regional Analysis"),
                     sidebarLayout(
                       sidebarPanel(
-                        selectInput("region", "Please select a region of choice",
-                                    Region_choice, selected = "New England")
+                        radioButtons("category", "Please select category of interest",
+                                     c("All Industry" = "All industry total",
+                                       "Private Sector" = " Private industries",
+                                       "Public Sector" = " Government and government enterprises"),
+                                       selected = "All industry total")
                       ),
-                      mainPanel(plotlyOutput("Piechart"))
+                      mainPanel(plotlyOutput("Bar"))
                      )
                     ),
           #Panel 3 - Eric
