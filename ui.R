@@ -21,7 +21,7 @@ my_ui <- navbarPage(
                           sliderTextInput("range", "Please select a time range",
                                           choices = years, selected = years[c(5,15)])
                         ),
-                        mainPanel(plotlyOutput("ustrendchart"))
+                        mainPanel(plotlyOutput("ustrendchart"), width = "100%")
                       )
                     ),
           # Panel 1.1 -Andrew
@@ -45,7 +45,7 @@ my_ui <- navbarPage(
                                        "Public Sector" = " Government and government enterprises"),
                                        selected = "All industry total")
                       ),
-                      mainPanel(plotlyOutput("Bar"))
+                      mainPanel(plotOutput("Bar"))
                      )
                     ),
           #Panel 3 - Eric

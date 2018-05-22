@@ -6,15 +6,15 @@ library(plotly)
 
 # server
 my_server <- function(input, output){
-  output$Bar <- renderPlotly({
+  output$Bar <- renderPlot({
    if(input$category == "All industry total"){
      g <- ggplot(all_industry, aes(x = GeoName, y = GDP_17_inbillion)) +
-       geom_bar(aes(fill = Description), stat="identity") + coord_flip()
+       geom_bar(aes(fill = Description), stat="identity") + theme(legend.background = element_rect(fill="gray90", size=.5, linetype="dotted")) + coord_flip()
      g
    }
   else if(input$category == " Private industries"){
     g <- ggplot(private_sector, aes(x = GeoName, y = GDP_17_inbillion)) +
-      geom_bar(aes(fill = Description), stat="identity") + coord_flip()
+      geom_bar(aes(fill = Description), stat="identity") + coord_flip() + theme(legend.position='right')
     g
   }
     
@@ -24,6 +24,7 @@ my_server <- function(input, output){
     g
   }
 })
+  
   output$ustrendchart <- renderPlotly({
     a <- plot_ly(ustrend_data, x= ~input$range,
                               name = "U.S. GDP",
