@@ -2,23 +2,41 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 library(plotly)
+library(shinyWidgets)
+library(shinythemes)
 
 #Source file
 source("regional_2017.R")
+source("trend_data.R")
 
 
-my_ui <- navbarPage("U.S. Overall Gross Domestic Product Report",
+my_ui <- navbarPage(
+  theme = shinytheme("sandstone"),
+  "U.S. Overall Gross Domestic Product Report",
           # Panel 1 - Andrew
                     tabPanel(
-                      titlePanel("Trending"),
+                      titlePanel("Trends (National)"),
                       sidebarLayout(
-                        sidebarPanel(),
-                        mainPanel()
+                        sidebarPanel(
+                          sliderTextInput("range", "Please select a time range",
+                                          choices = years, selected = years[c(5,15)])
+                        ),
+                        mainPanel(plotlyOutput("ustrendchart"))
                       )
                     ),
+          # Panel 1.1 -Andrew
+          tabPanel(
+            titlePanel("Trends (Industries)"),
+            sidebarLayout(
+              sidebarPanel(
+              ),
+              mainPanel(plotlyOutput("industrytrendchart"))
+            )
+          ),
+          
           #Panel 2 - Ryan
                   tabPanel(
-                    titlePanel("latest Regional Analysis"),
+                    titlePanel("Latest Regional Analysis"),
                     sidebarLayout(
                       sidebarPanel(
                         selectInput("region", "Please select a region of choice",
