@@ -17,3 +17,9 @@ all_industry <- GDP_data_interest %>%
 # Nationwide data
 nation_data <- GDP_data_interest %>%
   filter(GeoName == "United States")
+
+index <- 3
+for(i in all_industry[, -(1:2)]) {
+   all_industry[, index] <- as.numeric(i)
+   index <- index + 1
+}
