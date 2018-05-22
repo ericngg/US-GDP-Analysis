@@ -6,11 +6,7 @@ library(plotly)
 
 # server
 my_server <- function(input, output){
-<<<<<<< HEAD
   output$Bar <- renderPlotly({
- 
-#    category_selected <- data_regional %>%
- #     filter(Description == input$category)
    if(input$category == "All industry total"){
      g <- ggplot(all_industry, aes(x = GeoName, y = GDP_17_inbillion)) +
        geom_bar(aes(fill = Description), stat="identity") + coord_flip()
@@ -20,23 +16,14 @@ my_server <- function(input, output){
     g <- ggplot(private_sector, aes(x = GeoName, y = GDP_17_inbillion)) +
       geom_bar(aes(fill = Description), stat="identity") + coord_flip()
     g
-=======
-  output$Piechart <- renderPlotly({
-    p <- plot_ly(Region_2017, labels = ~Region_2017$Description[Region_2017$GeoName == input$region],
-                 values = ~Region_2017$X2017[Region_2017$GeoName == input$region], type = "pie") %>%
-      layout(title = paste0("United States Regional GDP - ", input$region," in 2017"),
-             xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-             yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
-    p
->>>>>>> ec5f464cee244bf5a73897e9f37a0205b843b0e1
   }
+    
   else if(input$category == " Government and government enterprises"){
     g <- ggplot(public_sector, aes(x = GeoName, y = GDP_17_inbillion)) +
       geom_bar(aes(fill = Description), stat="identity") + coord_flip()
     g
   }
-}
-)
+})
   output$ustrendchart <- renderPlotly({
     a <- plot_ly(ustrend_data, x= ~input$range,
                               name = "U.S. GDP",
@@ -67,4 +54,5 @@ my_server <- function(input, output){
     b
   })
 }
+
 shinyServer(my_server)
