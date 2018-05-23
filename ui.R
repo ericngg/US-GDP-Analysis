@@ -45,9 +45,11 @@ my_ui <- navbarPage(
                                        "Public Sector" = " Government and government enterprises"),
                                        selected = "All industry total")
                       ),
-                      mainPanel(plotOutput("Bar"))
+                      mainPanel(plotlyOutput("Bar", height = 500), width = "12"
+                                
+                      
                      )
-                    ),
+                    )),
           #Panel 3 - Eric
                  tabPanel(
                    titlePanel("Interactive Map"),
