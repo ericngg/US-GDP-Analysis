@@ -16,16 +16,13 @@ GDP_data <- read.csv(
 
 # Industries of interest
 top_list <- c(1, 12, 35, 45, 50, 68, 82)
-years <- c(1997:2017)
-
-# National Data
-ustrend_data <- GDP_data %>%
-  filter(GeoName == "United States",
-         IndustryId == 1) %>%
-  select(paste0("X", 1997:2017))
-colnames(ustrend_data) <- c(1997:2017)
-rownames(ustrend_data) <- "gdp"
-ustrend_data[]<- lapply(ustrend_data[], formatting)
+years <- list("1997" = 1997, "1998" = 1998, "1999" = 1999,
+              "2000" = 2000, "2001" = 2001, "2002" = 2002,
+              "2003" = 2003, "2004" = 2004, "2005" = 2005,
+              "2006" = 2006, "2007" = 2007, "2008" = 2008,
+              "2009" = 2009, "2010" = 2010, "2011" = 2011,
+              "2012" = 2012, "2013" = 2013, "2014" = 2014,
+              "2015" = 2015, "2016" = 2016, "2017" = 2017)
 
 # Trend data
 trend_data <- GDP_data %>%

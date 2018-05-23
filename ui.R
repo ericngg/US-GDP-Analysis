@@ -14,23 +14,15 @@ my_ui <- navbarPage(
   theme = shinytheme("sandstone"),
   "U.S. Overall Gross Domestic Product Report",
           # Panel 1 - Andrew
-                    tabPanel(
-                      titlePanel("Trends (National)"),
-                      sidebarLayout(
-                        sidebarPanel(
-                          sliderTextInput("range", "Please select a time range",
-                                          choices = years, selected = years[c(5,15)])
-                        ),
-                        mainPanel(plotlyOutput("ustrendchart"))
-                      )
-                    ),
-          # Panel 1.1 -Andrew
           tabPanel(
-            titlePanel("Trends (Industries)"),
+            titlePanel("Trends"),
             sidebarLayout(
               sidebarPanel(
+                sliderTextInput("range", "Please select a time range",
+                            choices = years, selected = c("2002", "2012")),
+                "Please click the labels to choose the industry of interest"
               ),
-              mainPanel(plotlyOutput("industrytrendchart"))
+              mainPanel(plotlyOutput("trendchart"))
             )
           ),
           

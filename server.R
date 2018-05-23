@@ -24,34 +24,30 @@ my_server <- function(input, output){
     g
   }
 })
-  output$ustrendchart <- renderPlotly({
-    a <- plot_ly(ustrend_data, x= ~input$range,
-                              name = "U.S. GDP",
-                              type = "scatter", mode = "lines+markers") %>%
+  filtered <- reactive({
+    t <- filter(trend_data, year >= input$range[1], year <= input$range[2])
+    return(t)
+  })
+  
+  output$trendchart <- plotly::renderPlotly({
+    a <- plot_ly(filtered(), x= ~year, y = ~all_industry_total,
+                name = "U.S. GDP", type = "scatter", mode = "lines+markers") %>%
       layout(title = "U.S. GDP Trend",
-             xaxis = list(title = "Year"),
-             yaxis = list(title = "GDP (in millions)"))
-    a  
-  }
-  )
-  output$industrytrendchart <- renderPlotly({
-    b <- plot_ly(trend_data, x= ~year, y = ~manufacturing,
-                                    name = "Manufacturing",
-                                    type = "scatter", mode = "lines+markers") %>%
-      layout(title = "U.S. GDP Trend by industry",
-             xaxis = list(title = "Year"),
+             xaxis = list(title = "Year", dtick = 1),
              yaxis = list(title = "GDP (in millions)")) %>%
       add_trace(x= ~year, y = ~information,
                 name = "Information", mode = "lines+markers") %>%
-      add_trace(x= ~year, y = ~retail_trade,
-                name = "Retail", mode = "lines+markers") %>%
+      add_trace(x= ~year, y = ~manufacturing,
+                name = "Manufacturing", mode = "lines+markers") %>%
       add_trace(x= ~year, y = ~finance_insurance_real_estate_rental_and_leasing,
-              name = "Finance", mode = "lines+markers") %>%
+                name = "Finance", mode = "lines+markers") %>%
       add_trace(x= ~year, y = ~educational_services_health_care_and_social_assistance,
                 name = "Education", mode = "lines+markers") %>%
       add_trace(x= ~year, y = ~government_and_government_enterprises,
-                name = "Government", mode = "lines+markers")
-    b
+                name = "Government", mode = "lines+markers") %>%
+      add_trace(x= ~year, y = ~retail_trade,
+                name = "Retail", mode = "lines+markers")
+      a
   })
 }
 
