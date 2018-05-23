@@ -18,7 +18,6 @@ my_server <- function(input, output){
   else if(input$category == " Government and government enterprises"){
     gov
   }
-<<<<<<< HEAD
 })
   filtered <- reactive({
     t <- filter(trend_data, year >= input$range[1], year <= input$range[2])
@@ -27,29 +26,7 @@ my_server <- function(input, output){
   
   output$trendchart <- plotly::renderPlotly({
     a <- plot_ly(filtered(), x= ~year, y = ~all_industry_total,
-                name = "U.S. GDP", type = "scatter", mode = "lines+markers") %>%
-=======
-}
-)
-
-
-  
-
-  
-  
-  
-  
-  
-  
-  
-  output$ustrendchart <- renderPlotly({
-    a <- plot_ly(ustrend_data, x= ~input$range,
-                              name = "U.S. GDP",
-                              type = "scatter", mode = "lines+markers") %>%
->>>>>>> 54a4cbf243d4d12c4ccb7941fe492169e2d9a9d4
-      layout(title = "U.S. GDP Trend",
-             xaxis = list(title = "Year", dtick = 1),
-             yaxis = list(title = "GDP (in millions)")) %>%
+                name = "U.S. GDP Trend", type = "scatter", mode = "lines+markers") %>%
       add_trace(x= ~year, y = ~information,
                 name = "Information", mode = "lines+markers") %>%
       add_trace(x= ~year, y = ~manufacturing,
@@ -65,5 +42,4 @@ my_server <- function(input, output){
       a
   })
 }
-
 shinyServer(my_server)
