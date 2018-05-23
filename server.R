@@ -26,7 +26,7 @@ my_server <- function(input, output){
   
   output$trendchart <- plotly::renderPlotly({
     a <- plot_ly(filtered(), x= ~year, y = ~all_industry_total,
-                name = "U.S. GDP Trend", type = "scatter", mode = "lines+markers") %>%
+                name = "National GDP", type = "scatter", mode = "lines+markers") %>%
       layout(title = "U.S. GDP Trend",
              xaxis = list(title = "Year", dtick = 1),
               yaxis = list(title = "GDP (in millions)")) %>%
