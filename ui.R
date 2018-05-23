@@ -14,6 +14,20 @@ my_ui <- navbarPage(
   theme = shinytheme("sandstone"),
   "U.S. Overall Gross Domestic Product Report",
           # Panel 1 - Andrew
+<<<<<<< HEAD
+=======
+                    tabPanel(
+                      titlePanel("Trends (National)"),
+                      sidebarLayout(
+                        sidebarPanel(
+                          sliderTextInput("range", "Please select a time range",
+                                          choices = years, selected = years[c(5,15)])
+                        ),
+                        mainPanel(plotlyOutput("ustrendchart"), width = "100%")
+                      )
+                    ),
+          # Panel 1.1 -Andrew
+>>>>>>> 54a4cbf243d4d12c4ccb7941fe492169e2d9a9d4
           tabPanel(
             titlePanel("Trends"),
             sidebarLayout(
@@ -37,9 +51,11 @@ my_ui <- navbarPage(
                                        "Public Sector" = " Government and government enterprises"),
                                        selected = "All industry total")
                       ),
-                      mainPanel(plotlyOutput("Bar"))
+                      mainPanel(plotlyOutput("Bar", height = 500), width = "12"
+                                
+                      
                      )
-                    ),
+                    )),
           #Panel 3 - Eric
                  tabPanel(
                    titlePanel("Interactive Map"),

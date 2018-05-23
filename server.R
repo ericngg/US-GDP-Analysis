@@ -8,21 +8,17 @@ library(plotly)
 my_server <- function(input, output){
   output$Bar <- renderPlotly({
    if(input$category == "All industry total"){
-     g <- ggplot(all_industry, aes(x = GeoName, y = GDP_17_inbillion)) +
-       geom_bar(aes(fill = Description), stat="identity") + coord_flip()
-     g
+     a
    }
+
   else if(input$category == " Private industries"){
-    g <- ggplot(private_sector, aes(x = GeoName, y = GDP_17_inbillion)) +
-      geom_bar(aes(fill = Description), stat="identity") + coord_flip()
-    g
+    p
   }
-    
+
   else if(input$category == " Government and government enterprises"){
-    g <- ggplot(public_sector, aes(x = GeoName, y = GDP_17_inbillion)) +
-      geom_bar(aes(fill = Description), stat="identity") + coord_flip()
-    g
+    gov
   }
+<<<<<<< HEAD
 })
   filtered <- reactive({
     t <- filter(trend_data, year >= input$range[1], year <= input$range[2])
@@ -32,6 +28,25 @@ my_server <- function(input, output){
   output$trendchart <- plotly::renderPlotly({
     a <- plot_ly(filtered(), x= ~year, y = ~all_industry_total,
                 name = "U.S. GDP", type = "scatter", mode = "lines+markers") %>%
+=======
+}
+)
+
+
+  
+
+  
+  
+  
+  
+  
+  
+  
+  output$ustrendchart <- renderPlotly({
+    a <- plot_ly(ustrend_data, x= ~input$range,
+                              name = "U.S. GDP",
+                              type = "scatter", mode = "lines+markers") %>%
+>>>>>>> 54a4cbf243d4d12c4ccb7941fe492169e2d9a9d4
       layout(title = "U.S. GDP Trend",
              xaxis = list(title = "Year", dtick = 1),
              yaxis = list(title = "GDP (in millions)")) %>%
