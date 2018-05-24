@@ -11,26 +11,23 @@ source("trend_data.R")
 
 
 my_ui <- navbarPage(
-  theme = shinytheme("sandstone"),
-  "U.S. Overall Gross Domestic Product Report",
-          # Panel 1 - Andrew
-                    tabPanel(
-                      titlePanel("Trends (National)"),
-                      sidebarLayout(
-                        sidebarPanel(
-                          sliderTextInput("range", "Please select a time range",
-                                          choices = years, selected = years[c(5,15)])
-                        ),
-                        mainPanel(plotlyOutput("ustrendchart"), width = "100%")
-                      )
-                    ),
-          # Panel 1.1 -Andrew
+  theme = shinytheme("cosmo"),
+  tags$div(class = "header", checked = NA,
+           tags$p("U.S. Overall Gross Domestic Product Report")),
+          # Panel 1 -Andrew
           tabPanel(
-            titlePanel("Trends (Industries)"),
+            titlePanel(tags$div(class = "title", checked = NA,
+                                tags$p("Trends"))),
             sidebarLayout(
               sidebarPanel(
+                sliderTextInput("range", "Please select a time range",
+                            choices = years, selected = c("2002", "2012")),
+                tags$link(rel = "stylesheet",
+                          type = "text/css", href = "style.css"),
+                tags$div(class = "tab", checked = NA,
+                         tags$p("Please click the labels to choose the industry of interest"))
               ),
-              mainPanel(plotlyOutput("industrytrendchart"))
+              mainPanel(plotlyOutput("trendchart"))
             )
           ),
           
