@@ -6,17 +6,12 @@ library(plotly)
 
 # server
 my_server <- function(input, output){
-#  region_input <- reactive({
-#    all_industry_data <- all_industry_data %>%
-#    filter(region %in% input$Region)
-#    })
-  
   output$Bar <- renderPlotly({
     
     
    if(input$category == "All industry total"){
-#     all_industry_data <- all_industry_data[all_industry_data$region %in% input$Region, ]
-     a <- plot_ly(all_industry_data[all_industry_data$region %in% input$Region, ], x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
+     data1 <- all_industry_data[all_industry_data$region %in% input$Region, ]
+     a <- plot_ly(data1, x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
                   type = "bar", name = "Real Estate, Renting, and Leasing") %>%
        add_trace(y = ~X.Government.and.government.enterprises, name = "State and local Government") %>%
        add_trace(y = ~X..Professional.and.business.services, name = "Professional and Business services") %>%
@@ -37,13 +32,12 @@ my_server <- function(input, output){
        add_trace(y = ~X..Utilities, name = "Utilities") %>%
        layout(xaxis = list(title = "Regions"),
               yaxis = list(title = "GDP (In billions USD)"), barmode = "stack")
-     
       a
    }
 
   else if(input$category == "top10"){
-  #  all_industry_data <- all_industry_data[all_industry_data$region %in% input$Region, ]
-    top10_data <- plot_ly(all_industry_data[all_industry_data$region %in% input$Region, ], x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
+    data1 <- all_industry_data[all_industry_data$region %in% input$Region, ]
+    top10_data <- plot_ly(data1, x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
                           type = "bar", name = "Real Estate, Renting, and Leasing") %>%
       add_trace(y = ~X.Government.and.government.enterprises, name = "State and local Government") %>%
       add_trace(y = ~X..Professional.and.business.services, name = "Professional and Business services") %>%
@@ -58,23 +52,9 @@ my_server <- function(input, output){
              yaxis = list(title = "GDP (In billions USD)"), barmode = "stack")
      top10_data
   }
-<<<<<<< HEAD
 }
 )
 
-  
-  
-
-  
-  
-  
-
-  output$ustrendchart <- renderPlotly({
-    a <- plot_ly(ustrend_data, x= ~input$range,
-                              name = "U.S. GDP",
-                              type = "scatter", mode = "lines+markers") %>%
-=======
-})
   filtered <- reactive({
     t <- filter(trend_data, year >= input$range[1], year <= input$range[2])
     return(t)
@@ -83,7 +63,6 @@ my_server <- function(input, output){
   output$trendchart <- plotly::renderPlotly({
     a <- plot_ly(filtered(), x= ~year, y = ~all_industry_total,
                 name = "National GDP", type = "scatter", mode = "lines+markers") %>%
->>>>>>> 1d034d21a746830d560ed65febb4006e260c5344
       layout(title = "U.S. GDP Trend",
              xaxis = list(title = "Year", dtick = 1),
               yaxis = list(title = "GDP (in millions)")) %>%
