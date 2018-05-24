@@ -40,14 +40,13 @@ my_ui <- navbarPage(
                     sidebarLayout(
                       sidebarPanel(
                         radioButtons("category", "Please select category of interest",
-                                     c("All Industry" = "All industry total",
-                                       "Private Sector" = " Private industries",
-                                       "Public Sector" = " Government and government enterprises"),
-                                       selected = "All industry total")
+                                     c("Top 10 Industries" = "top10",
+                                       "All Industry" = "All industry total"),
+                                       selected = "top10"),
+                        checkboxGroupInput("Region", "Region of choice", choice_region,
+                                           selected = c("New England", "Mideast"))
                       ),
                       mainPanel(plotlyOutput("Bar", height = 500), width = "12"
-                                
-                      
                      )
                     )),
           #Panel 3 - Eric
