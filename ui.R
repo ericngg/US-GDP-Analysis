@@ -4,11 +4,17 @@ library(ggplot2)
 library(plotly)
 library(shinyWidgets)
 library(shinythemes)
+library(leaflet)
+library(maps)
+library(geojsonio)
+library(RColorBrewer)
+library(htmltools)
+library(lazyeval)
 
 #Source file
 source("regional_2017.R")
 source("trend_data.R")
-
+source("map_data.R")
 
 my_ui <- navbarPage(
   theme = shinytheme("cosmo"),
@@ -52,8 +58,14 @@ my_ui <- navbarPage(
                  tabPanel(
                    titlePanel("Interactive Map"),
                     sidebarLayout(
-                      sidebarPanel(),
-                      mainPanel()
+                      sidebarPanel(
+                        textOutput("title"),
+                        selectInput("year", "Year:",
+                                    choices = colnames(map_all_industry[-(1:2)]),
+                                    selected = colnames(map_all_industry[3])),
+                        uiOutput("year")
+                      ),
+                      mainPanel(leafletOutput("industry_map"))
                      )
                    )
 )

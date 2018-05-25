@@ -3,15 +3,39 @@ library(dplyr)
 library(shiny)
 library(ggplot2)
 library(plotly)
+library(leaflet)
+library(maps)
+library(geojsonio)
+library(RColorBrewer)
+library(htmltools)
+library(lazyeval)
+library(sp)
+library(rgdal)
 
 # server
+<<<<<<< HEAD
 my_server <- function(input, output){
+  region_input <- reactive({
+    all_data <- all_industry_data %>%
+      filter(region %in% input$Region)
+    return(all_data)
+    })
+=======
+shinyServer(function(input, output) {
+  ##### Bars ###############################################################################
+>>>>>>> 65eeb445dab8ece38094485194c945864a3803c4
+  
   output$Bar <- renderPlotly({
     
     
    if(input$category == "All industry total"){
+<<<<<<< HEAD
+#     all_industry_data <- all_industry_data[all_industry_data$region %in% input$Region, ]
+     a <- plot_ly(region_input(), x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
+=======
      data1 <- all_industry_data[all_industry_data$region %in% input$Region, ]
      a <- plot_ly(data1, x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
+>>>>>>> 65eeb445dab8ece38094485194c945864a3803c4
                   type = "bar", name = "Real Estate, Renting, and Leasing") %>%
        add_trace(y = ~X.Government.and.government.enterprises, name = "State and local Government") %>%
        add_trace(y = ~X..Professional.and.business.services, name = "Professional and Business services") %>%
@@ -36,8 +60,13 @@ my_server <- function(input, output){
    }
 
   else if(input$category == "top10"){
+<<<<<<< HEAD
+  #  all_industry_data <- all_industry_data[all_industry_data$region %in% input$Region, ]
+    top10_data <- plot_ly(region_input(), x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
+=======
     data1 <- all_industry_data[all_industry_data$region %in% input$Region, ]
     top10_data <- plot_ly(data1, x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
+>>>>>>> 65eeb445dab8ece38094485194c945864a3803c4
                           type = "bar", name = "Real Estate, Renting, and Leasing") %>%
       add_trace(y = ~X.Government.and.government.enterprises, name = "State and local Government") %>%
       add_trace(y = ~X..Professional.and.business.services, name = "Professional and Business services") %>%
@@ -55,6 +84,17 @@ my_server <- function(input, output){
 }
 )
 
+<<<<<<< HEAD
+=======
+  
+
+  
+  
+  
+  
+  
+##### Plots ##############################################################################  
+>>>>>>> 65eeb445dab8ece38094485194c945864a3803c4
   filtered <- reactive({
     t <- filter(trend_data, year >= input$range[1], year <= input$range[2])
     return(t)
@@ -80,5 +120,93 @@ my_server <- function(input, output){
                 name = "Retail", mode = "lines+markers")
       a
   })
-}
-shinyServer(my_server)
+  
+  ##### Maps ###############################################################################
+  
+  mdata <- reactive({
+    select(map_all_industry, "GeoName", input$year)
+  })
+  
+  output$title <- renderText({
+    req(input$year)
+    paste0(input$year, " GDP:")
+  })
+  
+  states_frame <- geojson_read("USA.json", what = "sp")
+  states_frame <- sp::merge(states_frame, map_all_industry, by.x = "NAME", by.y = "GeoName")
+  
+  labels <- paste0("<strong>State: </strong>",
+                  states_frame$NAME,
+                  "<br><strong>GDP: </strong>",
+                  states_frame$X1997)
+  
+  output$industry_map <- renderLeaflet({
+    pal <- colorBin("YlOrRd", domain = states_frame$X1997, bins = states_frame$X1997)
+    leaflet(states_frame) %>%
+    addTiles() %>%
+    setView(-96, 37.8, 4) %>%
+    addPolygons(
+      data = states_frame,
+      fillColor = ~pal(X1997),
+      weight = 2,
+      opacity = 1,
+      color = "white",
+      dashArray = "3",
+      fillOpacity = 0.7,
+      highlight = highlightOptions(
+        weight = 5,
+        color = "#666",
+        dashArray = "",
+        fillOpacity = 0.7,
+        bringToFront = TRUE),
+      label = labels,
+      labelOptions = labelOptions(
+        style = list("font-weight" = "normal", padding = "3px 8px"),
+        textsize = "15px",
+        direction = "auto")
+      
+      #addLegend(pal = pal, values = ~input$year, opacity = 0.7,
+       #         position = "bottomright",
+        #        title = "2016 <br>"
+      #)
+      )
+    
+  })
+
+  observe({
+    label <- paste0("<strong>State: </strong>",
+                    states_frame$NAME,
+                    "<br><strong>GDP: </strong>",
+                    eval(parse(text = paste0("states_frame$", input$year))))
+    
+    leafletProxy("industry_map", data = states_frame) %>%
+      clearShapes() %>%
+      clearControls() %>%
+      addPolygons(
+        data = states_frame,
+        fillColor = ~par(eval(parse(text = input$year))),
+        weight = 2,
+        opacity = 1,
+        color = "white",
+        dashArray = "3",
+        fillOpacity = 0.7,
+        highlight = highlightOptions(
+          weight = 5,
+          color = "#666",
+          dashArray = "",
+          fillOpacity = 0.7,
+          bringToFront = TRUE),
+        label = labels,
+        labelOptions = labelOptions(
+          style = list("font-weight" = "normal", padding = "3px 8px"),
+          textsize = "15px",
+          direction = "auto")
+        )
+  })
+  
+  observe({
+   # addLegend(pal = pal, values = ~input$year, opacity = 0.7,
+    #          position = "bottomright",
+     #         title = "2016 <br>"
+  })
+})
