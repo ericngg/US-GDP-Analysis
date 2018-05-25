@@ -13,12 +13,16 @@ library(sp)
 library(rgdal)
 
 # server
-shinyServer(function(input, output) {
+
+my_server <- function(input, output){
+  region_input <- reactive({
+    all_data <- all_industry_data %>%
+      filter(region %in% input$Region)
+    return(all_data)
+    })
   ##### Bars ###############################################################################
   
   output$Bar <- renderPlotly({
-    
-    
    if(input$category == "All industry total"){
      data1 <- all_industry_data[all_industry_data$region %in% input$Region, ]
      a <- plot_ly(data1, x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
@@ -184,10 +188,20 @@ shinyServer(function(input, output) {
           style = list("font-weight" = "normal", padding = "3px 8px"),
           textsize = "15px",
           direction = "auto")
+<<<<<<< HEAD
         ) %>%
       addLegend(pal = qpal, values = ~eval(parse(text = input$year)), opacity = 0.7,
                 position = "bottomright",
                 title = "2016 <br>"
       )
+=======
+        )
   })
-})
+
+  observe({
+   # addLegend(pal = pal, values = ~input$year, opacity = 0.7,
+    #          position = "bottomright",
+     #         title = "2016 <br>"
+>>>>>>> 3c9121130ee256bcf5fbb844edf8c74a4288cc0a
+  })
+}
