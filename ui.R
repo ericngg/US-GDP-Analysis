@@ -63,7 +63,7 @@ my_ui <- navbarPage(
                                     selected = colnames(map_all_industry[3])),
                         uiOutput("year")
                       ),
-                      mainPanel(leafletOutput("industry_map"))
+                      mainPanel(leafletOutput("industry_map", height = "800"))
                      )
                    )
 )
