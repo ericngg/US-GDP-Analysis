@@ -20,10 +20,7 @@ industry_filter <- c("11, 21", 22, 23, "321,327-339", "311-316,322-326", 42, "44
 
 # Slice data into three categories: all industry, private industry, and Gov
 data_regional <- GDP_data %>%
-  filter(
-  #  Description == "All industry total" |
-   #      Description == " Private industries" |
-           Description == " Government and government enterprises" |
+  filter(Description == " Government and government enterprises" |
            IndustryClassification %in% industry_filter) %>%
   mutate(GDP_17_inbillion = X2017 / 1000) %>%
   select(GeoName, Description, GDP_17_inbillion)
@@ -52,10 +49,17 @@ public_filter <- function(industry_choice){
   data
 }
 
-Geo <- data.frame(unique(private_sector$GeoName))
+Geo <- data.frame(unique(all_industry$GeoName))
 colnames(Geo) <- "region"
 regiongeo <- as.vector(Geo)
-choice_region <- unique(private_sector$GeoName)
+choice_region <- c("New England (CT, ME, MA, NH, RI, VT)" = "New England",
+                   "Mideast (DE, DC, MD, NJ, NY, PA)" = "Mideast",
+                   "Great Lakes (IL, IN, MI, OH, WI)" = "Great Lakes",
+                   "Plains (IA, KS, MN, MO, NE, ND, SD)" = "Plains",
+                   "Southeast (AB, AK, FL, GA, KY, LA, MS, NC, SC, TN, VA, WV)" = "Southeast",
+                   "Southwest (AZ, NM, OK, TX)" = "Southwest",
+                   "Rocky Mountain (CO, ID, MT, UT, WY)" = "Rocky Mountain",
+                   "Far West (AL, CA, HI, NV, OR, WA)" = "Far West")   
 
 all_industry_data <- data.frame(Geo, public_filter("  Utilities"), public_filter("  Construction"),
                                 public_filter("   Nondurable goods manufacturing"), public_filter("   Durable goods manufacturing"),
