@@ -57,9 +57,13 @@ my_ui <- navbarPage(
                    titlePanel("Interactive Map"),
                     sidebarLayout(
                       sidebarPanel(
-                        uiOutput("catOutput")
+                        textOutput("title"),
+                        selectInput("year", "Year:",
+                                    choices = colnames(map_all_industry[-(1:2)]),
+                                    selected = colnames(map_all_industry[3])),
+                        uiOutput("year")
                       ),
-                      mainPanel(leafletOutput("all_industry_map"))
+                      mainPanel(leafletOutput("industry_map"))
                      )
                    )
 )
