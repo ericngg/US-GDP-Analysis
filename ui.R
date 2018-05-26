@@ -32,9 +32,17 @@ my_ui <- navbarPage(
                           type = "text/css", href = "style.css"),
                 tags$div(class = "tab", checked = NA,
                          tags$p("Please click the labels to choose the industry of interest")),
+                helpText("Double clicking an industry could isolate its trend"),
                 width = 3
               ),
-              mainPanel(plotlyOutput("trendchart", width = 1000))
+              mainPanel(plotlyOutput("trendchart", width = 1000),
+                        tags$div(class = "analysis", checked = NA,
+                                 tags$p("This line chart demonstrates how the U.S. GDP developed
+                                        over time in the recent 20 years. By changing the year 
+                                        range and the industry of interest, you can observe the changes
+                                        and relate to recent ecnomic development. For example, the GDP
+                                        of the big industries, especially finance, dropped significantly
+                                        after the financial crisis in 2008.")))
             )
           ),
           
