@@ -13,24 +13,15 @@ library(sp)
 library(rgdal)
 
 # server
-<<<<<<< HEAD
-=======
-
->>>>>>> 95fb84d3b4281e7a338a3f2c1ab520f5ac921506
 my_server <- function(input, output){
   region_input <- reactive({
     all_data <- all_industry_data %>%
       filter(region %in% input$Region)
     return(all_data)
     })
-<<<<<<< HEAD
 }
 shinyServer(function(input, output) {
   ##### Bars ###############################################################################
-=======
-  ##### Bars ###############################################################################
-  
->>>>>>> 95fb84d3b4281e7a338a3f2c1ab520f5ac921506
   output$Bar <- renderPlotly({
    if(input$category == "All industry total"){
      data1 <- all_industry_data[all_industry_data$region %in% input$Region, ]
@@ -77,16 +68,6 @@ shinyServer(function(input, output) {
   }
 }
 )
-
-<<<<<<< HEAD
-=======
-  
-
->>>>>>> 95fb84d3b4281e7a338a3f2c1ab520f5ac921506
-  
-  
-  
-  
   
 ##### Plots ##############################################################################  
   filtered <- reactive({
@@ -125,7 +106,7 @@ shinyServer(function(input, output) {
   
   output$title <- renderText({
     req(input$year)
-    paste0(input$year, " GDP:")
+    paste0(substring(input$year, 2), " GDP:")
   })
   
   labels <- sprintf(
@@ -200,20 +181,17 @@ shinyServer(function(input, output) {
           style = list("font-weight" = "normal", padding = "3px 8px"),
           textsize = "15px",
           direction = "auto")
-<<<<<<< HEAD
         ) %>%
       addLegend(pal = qpal, values = ~eval(parse(text = input$year)), opacity = 0.7,
                 position = "bottomright",
                 title = "2016 <br>"
       )
-=======
-        )
   })
 
   observe({
    # addLegend(pal = pal, values = ~input$year, opacity = 0.7,
     #          position = "bottomright",
      #         title = "2016 <br>"
->>>>>>> 3c9121130ee256bcf5fbb844edf8c74a4288cc0a
   })
 }
+)

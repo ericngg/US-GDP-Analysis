@@ -31,9 +31,10 @@ my_ui <- navbarPage(
                 tags$link(rel = "stylesheet",
                           type = "text/css", href = "style.css"),
                 tags$div(class = "tab", checked = NA,
-                         tags$p("Please click the labels to choose the industry of interest"))
+                         tags$p("Please click the labels to choose the industry of interest")),
+                width = 3
               ),
-              mainPanel(plotlyOutput("trendchart"))
+              mainPanel(plotlyOutput("trendchart", width = 1000))
             )
           ),
           
@@ -61,9 +62,10 @@ my_ui <- navbarPage(
                       sidebarPanel(
                         textOutput("title"),
                         selectInput("year", "Year:",
-                                    choices = colnames(map_all_industry[-(1:2)]),
-                                    selected = colnames(map_all_industry[3])),
-                        uiOutput("year")
+                                    choices = years_choice_map,
+                                    selected = "1997"),
+                        uiOutput("year"),
+                        width = 3
                       ),
                       mainPanel(leafletOutput("industry_map", height = "800"))
                      )

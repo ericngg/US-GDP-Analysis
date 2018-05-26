@@ -49,9 +49,7 @@ public_filter <- function(industry_choice){
 Geo <- data.frame(unique(all_industry$GeoName))
 colnames(Geo) <- "region"
 regiongeo <- as.vector(Geo)
-<<<<<<< HEAD
 choice_region <- unique(all_industry$GeoName)
-=======
 choice_region <- c("New England (CT, ME, MA, NH, RI, VT)" = "New England",
                    "Mideast (DE, DC, MD, NJ, NY, PA)" = "Mideast",
                    "Great Lakes (IL, IN, MI, OH, WI)" = "Great Lakes",
@@ -60,7 +58,6 @@ choice_region <- c("New England (CT, ME, MA, NH, RI, VT)" = "New England",
                    "Southwest (AZ, NM, OK, TX)" = "Southwest",
                    "Rocky Mountain (CO, ID, MT, UT, WY)" = "Rocky Mountain",
                    "Far West (AL, CA, HI, NV, OR, WA)" = "Far West")   
->>>>>>> 95fb84d3b4281e7a338a3f2c1ab520f5ac921506
 
 all_industry_data <- data.frame(Geo, public_filter("  Utilities"), public_filter("  Construction"),
                                 public_filter("   Nondurable goods manufacturing"), public_filter("   Durable goods manufacturing"),
