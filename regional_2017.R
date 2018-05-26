@@ -39,9 +39,6 @@ all_industry <- GDP_data %>%
   select(GeoName, Description, GDP_17_inbillion)
 
 
-
-
-
 public_filter <- function(industry_choice){
   data <- all_industry %>%
     filter(Description == industry_choice) %>%
@@ -52,10 +49,10 @@ public_filter <- function(industry_choice){
   data
 }
 
-Geo <- data.frame(unique(private_sector$GeoName))
+Geo <- data.frame(unique(all_industry$GeoName))
 colnames(Geo) <- "region"
 regiongeo <- as.vector(Geo)
-choice_region <- unique(private_sector$GeoName)
+choice_region <- unique(all_industry$GeoName)
 
 all_industry_data <- data.frame(Geo, public_filter("  Utilities"), public_filter("  Construction"),
                                 public_filter("   Nondurable goods manufacturing"), public_filter("   Durable goods manufacturing"),
@@ -110,46 +107,6 @@ a <- plot_ly(all_industry_data, x = ~region, y = ~X...Real.estate.and.rental.and
 
 
 
-
-#####
-
-
-#private_industry <- all_industry %>%
- # filter(Description == " Private industries") %>%
-  #mutate("Private industries" = GDP_17_inbillion) %>%
-  #select("Private industries")
-
-#private_industry <- as.vector(private_industry)
-
-#public_industry <- all_industry %>%
- # filter(Description == " Government and government enterprises") %>%
-  #mutate(" Government and government enterprises" = GDP_17_inbillion) %>%
-  #select(" Government and government enterprises")
-
-#public_industry <- as.vector(public_industry)
-
-
-
-
-
-#### Public industry plot
-#public_industry <- all_industry %>%
-#  filter(Description == " Government and government enterprises") %>%
-#  mutate(" Government and government enterprises" = GDP_17_inbillion) %>%
-#  select(" Government and government enterprises")
-
-#public_industry <- as.vector(public_industry)
-#
-#gov_data <- data.frame(Geo, public_industry)
-#gov <- plot_ly(gov_data, x = ~region, y = ~X.Government.and.government.enterprises,
-#              type = "bar", name = "Government - Public Sector") %>%
-#  layout(xaxis = list(title = "Regions"),
-#        yaxis = list(title = "GDP (In billions)"), barmode = "stack")
-
-
-
-## barchart + coord_polar
-
 ## Information - Sillicon Valley in CA
 GDP_data %>%
   filter(Description == "  Information") %>%
@@ -174,39 +131,3 @@ GDP_data %>%
 GDP_data %>%
   filter(Description == "   Arts, entertainment, and recreation", Region == 5) %>%
   select(GeoName, X2017, Description)
-
-
-
-
-
-
-
-
-
-
-
-
-#private_filter <- function(industry_choice){
-#  data <- all_industry %>%
-#    filter(Description == industry_choice) %>%
-#    mutate(GDP = GDP_17_inbillion) %>%
-#    select(GDP)
-#  colnames(data) <- industry_choice
-#  data <- as.vector(data)
-#  data
-#}
-# public sector data
-#public_sector <- GDP_data %>%
-#  filter(Description == " Government and government enterprises") %>%
-#  mutate(GDP_17_inbillion = X2017 / 1000) %>%
-#  select(GeoName, Description, GDP_17_inbillion)
-
-# private sector data
-#private_sector <- GDP_data %>%
-#  filter(IndustryClassification %in% industry_filter) %>%
-#  mutate(GDP_17_inbillion = X2017 / 1000) %>%
-#  select(GeoName, Description, GDP_17_inbillion)
-
-
-
-

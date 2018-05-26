@@ -13,29 +13,19 @@ library(sp)
 library(rgdal)
 
 # server
-<<<<<<< HEAD
 my_server <- function(input, output){
   region_input <- reactive({
     all_data <- all_industry_data %>%
       filter(region %in% input$Region)
     return(all_data)
     })
-=======
+}
 shinyServer(function(input, output) {
   ##### Bars ###############################################################################
->>>>>>> 65eeb445dab8ece38094485194c945864a3803c4
-  
   output$Bar <- renderPlotly({
-    
-    
    if(input$category == "All industry total"){
-<<<<<<< HEAD
-#     all_industry_data <- all_industry_data[all_industry_data$region %in% input$Region, ]
-     a <- plot_ly(region_input(), x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
-=======
      data1 <- all_industry_data[all_industry_data$region %in% input$Region, ]
      a <- plot_ly(data1, x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
->>>>>>> 65eeb445dab8ece38094485194c945864a3803c4
                   type = "bar", name = "Real Estate, Renting, and Leasing") %>%
        add_trace(y = ~X.Government.and.government.enterprises, name = "State and local Government") %>%
        add_trace(y = ~X..Professional.and.business.services, name = "Professional and Business services") %>%
@@ -60,13 +50,8 @@ shinyServer(function(input, output) {
    }
 
   else if(input$category == "top10"){
-<<<<<<< HEAD
-  #  all_industry_data <- all_industry_data[all_industry_data$region %in% input$Region, ]
-    top10_data <- plot_ly(region_input(), x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
-=======
     data1 <- all_industry_data[all_industry_data$region %in% input$Region, ]
     top10_data <- plot_ly(data1, x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
->>>>>>> 65eeb445dab8ece38094485194c945864a3803c4
                           type = "bar", name = "Real Estate, Renting, and Leasing") %>%
       add_trace(y = ~X.Government.and.government.enterprises, name = "State and local Government") %>%
       add_trace(y = ~X..Professional.and.business.services, name = "Professional and Business services") %>%
@@ -84,17 +69,12 @@ shinyServer(function(input, output) {
 }
 )
 
-<<<<<<< HEAD
-=======
-  
-
   
   
   
   
   
 ##### Plots ##############################################################################  
->>>>>>> 65eeb445dab8ece38094485194c945864a3803c4
   filtered <- reactive({
     t <- filter(trend_data, year >= input$range[1], year <= input$range[2])
     return(t)
