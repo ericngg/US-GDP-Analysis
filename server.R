@@ -19,8 +19,34 @@ my_server <- function(input, output){
       filter(region %in% input$Region)
     return(all_data)
     })
-}
-shinyServer(function(input, output) {
+
+  output$answersCA <- renderText({
+    if(input$AnswerCA){
+      print("The thriving Silicon Valley area in California and the Greater Seattle area in Washington are likely to be the drivers for this observed phenomenon.")
+    }
+    else{
+      print("Answer:")
+    }
+  })
+
+  output$answersNY <- renderText({
+    if(input$AnswerNY){
+      print("The New York Stock Exchange and NASDAQ, both located in New York, could potentially be the main factors that lead Mideast to the greatest Productivity in this field in the U.S..")
+    }
+    else{
+      print("Answer:")
+    }
+  })
+
+  output$answersTX <- renderText({
+    if(input$AnswerTX){
+      print("Texas' oil mining industry can be the underlying reason for southwest's highest nationwide productivity in natural resource.")
+    }
+    else{
+      print("Answer:")
+    }
+  })
+
   ##### Bars ###############################################################################
   output$Bar <- renderPlotly({
    if(input$category == "All industry total"){
@@ -194,4 +220,5 @@ shinyServer(function(input, output) {
      #         title = "2016 <br>"
   })
 }
-)
+
+shinyServer(my_server)

@@ -43,7 +43,7 @@ my_ui <- navbarPage(
                     titlePanel("Latest Regional Analysis"),
                     sidebarLayout(
                       sidebarPanel(tags$div(class = "title", checked = NA,
-                                            tags$p("Regional GDP")),
+                                            tags$p("Regional GDP in 2017")),
                         radioButtons("category", "Category of interest",
                                      c("Top 10 Industries" = "top10",
                                        "All Industry" = "All industry total"),
@@ -54,6 +54,28 @@ my_ui <- navbarPage(
                       ),
                       mainPanel(plotlyOutput("Bar", height = 500), width = "9"
                      )
+                    ),
+                    sidebarLayout(
+                      wellPanel(tags$div(class = "ryans", checked = NA,
+                                         tags$p("Double click on the tab - information- on the right side. Why would possibly be the reason that Far West
+                                                has the highest GDP in 2017 in the industry of information?")),
+                        actionButton("AnswerCA", "Click me and see Possible Reason")
+                      ),
+                      mainPanel(textOutput("answersCA"))
+                    ),
+                    sidebarLayout(
+                      wellPanel(tags$div(class = "ryans", checked = NA,
+                                         tags$p("Next, select the industry - Finance and Insurance. How is it that Mideast region dominates this particular industry?")),
+                                actionButton("AnswerNY", "Click me and see Possible Reason")
+                      ),
+                      mainPanel(textOutput("answersNY"))
+                    ),
+                    sidebarLayout(
+                      wellPanel(tags$div(class = "ryans", checked = NA,
+                                         tags$p("Lastly, take a look at the industry - Natural Resources. Why might Southwest have the greatest GDP in the natural resource industry?")),
+                                actionButton("AnswerTX", "Click me and see Possible Reason")
+                      ),
+                      mainPanel(textOutput("answersTX"))
                     )),
           #Panel 3 - Eric
                  tabPanel(
