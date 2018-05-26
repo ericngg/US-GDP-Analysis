@@ -41,13 +41,15 @@ my_ui <- navbarPage(
                   tabPanel(
                     titlePanel("Latest Regional Analysis"),
                     sidebarLayout(
-                      sidebarPanel("Regional GDP", tags$div(
+                      sidebarPanel(tags$div(class = "title", checked = NA,
+                                            tags$p("Regional GDP")),
                         radioButtons("category", "Category of interest",
                                      c("Top 10 Industries" = "top10",
                                        "All Industry" = "All industry total"),
                                        selected = "top10"),
                         checkboxGroupInput("Region", "Region of choice", choice_region,
-                                           selected = c("New England", "Mideast"))), width = 3
+                                           selected = c("New England", "Mideast")),
+                                           width = 3
                       ),
                       mainPanel(plotlyOutput("Bar", height = 500), width = "9"
                      )
@@ -63,7 +65,7 @@ my_ui <- navbarPage(
                                     selected = colnames(map_all_industry[3])),
                         uiOutput("year")
                       ),
-                      mainPanel(leafletOutput("industry_map"))
+                      mainPanel(leafletOutput("industry_map", height = "800"))
                      )
                    )
 )

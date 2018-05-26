@@ -13,15 +13,24 @@ library(sp)
 library(rgdal)
 
 # server
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95fb84d3b4281e7a338a3f2c1ab520f5ac921506
 my_server <- function(input, output){
   region_input <- reactive({
     all_data <- all_industry_data %>%
       filter(region %in% input$Region)
     return(all_data)
     })
+<<<<<<< HEAD
 }
 shinyServer(function(input, output) {
   ##### Bars ###############################################################################
+=======
+  ##### Bars ###############################################################################
+  
+>>>>>>> 95fb84d3b4281e7a338a3f2c1ab520f5ac921506
   output$Bar <- renderPlotly({
    if(input$category == "All industry total"){
      data1 <- all_industry_data[all_industry_data$region %in% input$Region, ]
@@ -69,6 +78,11 @@ shinyServer(function(input, output) {
 }
 )
 
+<<<<<<< HEAD
+=======
+  
+
+>>>>>>> 95fb84d3b4281e7a338a3f2c1ab520f5ac921506
   
   
   
@@ -102,6 +116,8 @@ shinyServer(function(input, output) {
   })
   
   ##### Maps ###############################################################################
+  states_frame <- geojson_read("USA.json", what = "sp")
+  states_frame_all <- sp::merge(states_frame, map_all_industry, by.x = "NAME", by.y = "GeoName")
   
   mdata <- reactive({
     select(map_all_industry, "GeoName", input$year)
@@ -112,22 +128,19 @@ shinyServer(function(input, output) {
     paste0(input$year, " GDP:")
   })
   
-  states_frame <- geojson_read("USA.json", what = "sp")
-  states_frame <- sp::merge(states_frame, map_all_industry, by.x = "NAME", by.y = "GeoName")
-  
-  labels <- paste0("<strong>State: </strong>",
-                  states_frame$NAME,
-                  "<br><strong>GDP: </strong>",
-                  states_frame$X1997)
+  labels <- sprintf(
+    "<strong>%s</strong><br/>%g Millions",
+    states_frame_all$NAME, states_frame_all$X1997
+  ) %>% lapply(htmltools::HTML)
+  qpal <- colorQuantile("YlOrRd", states_frame_all$X1997, n = 9, na.color = "#bdbdbd")
   
   output$industry_map <- renderLeaflet({
-    pal <- colorBin("YlOrRd", domain = states_frame$X1997, bins = states_frame$X1997)
-    leaflet(states_frame) %>%
+    leaflet(states_frame_all) %>%
     addTiles() %>%
     setView(-96, 37.8, 4) %>%
     addPolygons(
-      data = states_frame,
-      fillColor = ~pal(X1997),
+      data = states_frame_all,
+      fillColor = ~qpal(X1997),
       weight = 2,
       opacity = 1,
       color = "white",
@@ -138,33 +151,39 @@ shinyServer(function(input, output) {
         color = "#666",
         dashArray = "",
         fillOpacity = 0.7,
-        bringToFront = TRUE),
+       bringToFront = TRUE),
       label = labels,
       labelOptions = labelOptions(
         style = list("font-weight" = "normal", padding = "3px 8px"),
         textsize = "15px",
         direction = "auto")
-      
-      #addLegend(pal = pal, values = ~input$year, opacity = 0.7,
-       #         position = "bottomright",
-        #        title = "2016 <br>"
-      #)
-      )
+    ) %>%
+    addLegend(pal = qpal, values = ~X1997, opacity = 0.7,
+              position = "bottomright",
+              title = "X1997"
+    )
     
   })
 
   observe({
-    label <- paste0("<strong>State: </strong>",
-                    states_frame$NAME,
-                    "<br><strong>GDP: </strong>",
-                    eval(parse(text = paste0("states_frame$", input$year))))
+    states_frames <- sp::merge(states_frame, mdata(), by.x = "NAME", by.y = "GeoName")
+    #pal <- colorBin("YlOrRd", domain = eval(parse(text = paste0("states_frames$", input$year))), 
+    #                bins = eval(parse(text = paste0("states_frames$", input$year))))
+    qpal <- colorQuantile("YlOrRd", eval(parse(text = paste0("states_frames$", input$year))), n = 9,
+                          na.color = "#bdbdbd")
     
-    leafletProxy("industry_map", data = states_frame) %>%
+    labels <- sprintf(
+      "<strong>%s</strong><br/>%g Millions",
+      states_frames$NAME, eval(parse(text = paste0("states_frames$", input$year)))
+    ) %>% lapply(htmltools::HTML)
+    
+    leafletProxy("industry_map", data = states_frames) %>%
+      addTiles() %>%
       clearShapes() %>%
       clearControls() %>%
       addPolygons(
-        data = states_frame,
-        fillColor = ~par(eval(parse(text = input$year))),
+        data = states_frames,
+        fillColor = ~qpal(eval(parse(text = input$year))),
         weight = 2,
         opacity = 1,
         color = "white",
@@ -181,12 +200,20 @@ shinyServer(function(input, output) {
           style = list("font-weight" = "normal", padding = "3px 8px"),
           textsize = "15px",
           direction = "auto")
+<<<<<<< HEAD
+        ) %>%
+      addLegend(pal = qpal, values = ~eval(parse(text = input$year)), opacity = 0.7,
+                position = "bottomright",
+                title = "2016 <br>"
+      )
+=======
         )
   })
-  
+
   observe({
    # addLegend(pal = pal, values = ~input$year, opacity = 0.7,
     #          position = "bottomright",
      #         title = "2016 <br>"
+>>>>>>> 3c9121130ee256bcf5fbb844edf8c74a4288cc0a
   })
-})
+}
