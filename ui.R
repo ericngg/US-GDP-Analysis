@@ -64,26 +64,29 @@ my_ui <- navbarPage(
                      )
                     ),
                     sidebarLayout(
-                      wellPanel(tags$div(class = "ryans", checked = NA,
-                                         tags$p("Double click on the tab - information- on the right side. Why would possibly be the reason that Far West
-                                                has the highest GDP in 2017 in the industry of information?")),
+                      wellPanel(tags$div(class = "title", checked = NA,
+                                         tags$p("Challenge #1")), tags$div(class = "ryans", checked = NA,
+                                         tags$p("Double click on the label 'information' on the top right side. What would possibly be the reason that Far West
+                                                has the highest GDP in 2017 in the industry of information across the nation?")),
                         actionButton("AnswerCA", "Click me and see Possible Reason")
                       ),
-                      mainPanel(textOutput("answersCA"))
+                      mainPanel(textOutput("answersCA"), tags$br(), tags$br(), tags$br())
                     ),
                     sidebarLayout(
-                      wellPanel(tags$div(class = "ryans", checked = NA,
-                                         tags$p("Next, select the industry - Finance and Insurance. How is it that Mideast region dominates this particular industry?")),
+                      wellPanel(tags$div(class = "title", checked = NA,
+                                         tags$p("Challenge #2")), tags$div(class = "ryans", checked = NA,
+                                         tags$p("Next, select the industry 'Finance and Insurance'. How is it that Mideast region dominates this particular industry, compared to other regions?")),
                                 actionButton("AnswerNY", "Click me and see Possible Reason")
                       ),
-                      mainPanel(textOutput("answersNY"))
+                      mainPanel(textOutput("answersNY"), tags$br(), tags$br(), tags$br())
                     ),
                     sidebarLayout(
-                      wellPanel(tags$div(class = "ryans", checked = NA,
-                                         tags$p("Lastly, take a look at the industry - Natural Resources. Why might Southwest have the greatest GDP in the natural resource industry?")),
+                      wellPanel(tags$div(class = "title", checked = NA,
+                                         tags$p("Challenge #3")), tags$div(class = "ryans", checked = NA,
+                                         tags$p("Lastly, take a look at the industry 'Natural Resources' (you might want to check the box 'all industry'). Why does Southwest have the greatest GDP in the natural resource industry?")),
                                 actionButton("AnswerTX", "Click me and see Possible Reason")
                       ),
-                      mainPanel(textOutput("answersTX"))
+                      mainPanel(textOutput("answersTX"), tags$br(), tags$br(), tags$br())
                     )),
           #Panel 3 - Eric
                  tabPanel(
