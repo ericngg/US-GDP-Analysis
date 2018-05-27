@@ -1,3 +1,4 @@
+#setup
 library(shiny)
 library(dplyr)
 library(ggplot2)
@@ -16,12 +17,12 @@ source("regional_2017.R")
 source("trend_data.R")
 source("map_data.R")
 
-my_ui <- navbarPage(
+shinyUI(navbarPage(
   theme = shinytheme("cosmo"),
   tags$div(class = "header", checked = NA,
            tags$p("U.S. Overall GDP Analysis")),
-          # Panel 1 -Andrew
-          tabPanel(
+           # Panel 1 -Andrew
+           tabPanel(
             titlePanel(tags$div(class = "title", checked = NA,
                                 tags$p("Trends"))),
             sidebarLayout(
@@ -44,64 +45,72 @@ my_ui <- navbarPage(
                                         of the big industries, especially finance, dropped significantly
                                         after the financial crisis in 2008.")))
             )
-          ),
-          
-          #Panel 2 - Ryan
-                  tabPanel(
-                    titlePanel("Latest Regional Analysis"),
-                    sidebarLayout(
-                      sidebarPanel(tags$div(class = "title", checked = NA,
-                                            tags$p("Regional GDP in 2017")),
-                        radioButtons("category", "Category of interest",
-                                     c("Top 10 Industries" = "top10",
-                                       "All Industry" = "All industry total"),
-                                       selected = "top10"),
-                        checkboxGroupInput("Region", "Region of choice", choice_region,
-                                           selected = c("New England", "Mideast")),
-                                           width = 3
-                      ),
-                      mainPanel(plotlyOutput("Bar", height = 500), width = "9"
-                     )
-                    ),
-                    sidebarLayout(
-                      wellPanel(tags$div(class = "title", checked = NA,
-                                         tags$p("Challenge #1")), tags$div(class = "ryans", checked = NA,
-                                         tags$p("Double click on the label 'information' on the top right side. What would possibly be the reason that Far West
-                                                has the highest GDP in 2017 in the industry of information across the nation?")),
-                        actionButton("AnswerCA", "Click me and see Possible Reason")
-                      ),
-                      mainPanel(textOutput("answersCA"), tags$br(), tags$br(), tags$br())
-                    ),
-                    sidebarLayout(
-                      wellPanel(tags$div(class = "title", checked = NA,
-                                         tags$p("Challenge #2")), tags$div(class = "ryans", checked = NA,
-                                         tags$p("Next, select the industry 'Finance and Insurance'. How is it that Mideast region dominates this particular industry, compared to other regions?")),
-                                actionButton("AnswerNY", "Click me and see Possible Reason")
-                      ),
-                      mainPanel(textOutput("answersNY"), tags$br(), tags$br(), tags$br())
-                    ),
-                    sidebarLayout(
-                      wellPanel(tags$div(class = "title", checked = NA,
-                                         tags$p("Challenge #3")), tags$div(class = "ryans", checked = NA,
-                                         tags$p("Lastly, take a look at the industry 'Natural Resources' (you might want to check the box 'all industry'). Why does Southwest have the greatest GDP in the natural resource industry?")),
-                                actionButton("AnswerTX", "Click me and see Possible Reason")
-                      ),
-                      mainPanel(textOutput("answersTX"), tags$br(), tags$br(), tags$br())
-                    )),
-          #Panel 3 - Eric
-                 tabPanel(
-                   titlePanel("Interactive Map"),
-                    sidebarLayout(
-                      sidebarPanel(
-                        textOutput("title"),
-                        selectInput("year", "Year:",
-                                    choices = years_choice_map,
-                                    selected = "1997"),
-                        uiOutput("year"),
-                        width = 3
-                      ),
-                      mainPanel(leafletOutput("industry_map", height = "800"))
-                     )
-                   )
-)
-shinyUI(my_ui)
+           ),
+           # Panel 2 - Ryan
+           tabPanel(
+             titlePanel("Latest Regional Analysis"),
+             sidebarLayout(
+               sidebarPanel(tags$div(class = "title", checked = NA,
+                                     tags$p("Regional GDP in 2017")),
+                 radioButtons("category", "Category of interest",
+                              c("Top 10 Industries" = "top10",
+                                "All Industry" = "All industry total"),
+                                selected = "top10"),
+                 checkboxGroupInput("Region", "Region of choice", choice_region,
+                                    selected = c("New England", "Mideast")),
+                                    width = 3
+               ),
+               mainPanel(plotlyOutput("Bar", height = 500), width = "9"
+              )
+             ),
+             sidebarLayout(
+               wellPanel(tags$div(class = "title", checked = NA,
+                                  tags$p("Challenge #1")), tags$div(class = "ryans", checked = NA,
+                                  tags$p("Double click on the label 'information' on the top right side. What would possibly be the reason that Far West
+                                         has the highest GDP in 2017 in the industry of information across the nation?")),
+                 actionButton("AnswerCA", "Click me and see Possible Reason")
+               ),
+               mainPanel(textOutput("answersCA"), tags$br(), tags$br(), tags$br())
+             ),
+             sidebarLayout(
+               wellPanel(tags$div(class = "title", checked = NA,
+                                  tags$p("Challenge #2")), tags$div(class = "ryans", checked = NA,
+                                  tags$p("Next, select the industry 'Finance and Insurance'. How is it that Mideast region dominates this particular industry, compared to other regions?")),
+                         actionButton("AnswerNY", "Click me and see Possible Reason")
+               ),
+               mainPanel(textOutput("answersNY"), tags$br(), tags$br(), tags$br())
+             ),
+             sidebarLayout(
+               wellPanel(tags$div(class = "title", checked = NA,
+                                  tags$p("Challenge #3")), tags$div(class = "ryans", checked = NA,
+                                  tags$p("Lastly, take a look at the industry 'Natural Resources' (you might want to check the box 'all industry'). Why does Southwest have the greatest GDP in the natural resource industry?")),
+                         actionButton("AnswerTX", "Click me and see Possible Reason")
+               ),
+               mainPanel(textOutput("answersTX"), tags$br(), tags$br(), tags$br())
+             )),
+           #Panel 3 - Eric
+            tabPanel(
+              titlePanel("Interactive Map"),
+               sidebarLayout(
+                 sidebarPanel(
+                   textOutput("title"),
+                   selectInput("year", "Year:",
+                               choices = years_choice_map,
+                               selected = "1997"),
+                   uiOutput("year"),
+                   width = 3,
+                   
+                   tags$br(), 
+                   tags$div(
+                     tags$p("Map and data of the GDP for a specified
+                             year for all industries:")
+                   ),
+                   tags$br(),
+                   
+                   dataTableOutput("year_table")
+                 ),
+                 mainPanel(leafletOutput("industry_map", height = "800"))
+               )
+             )
+  
+))

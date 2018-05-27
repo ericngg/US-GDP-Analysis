@@ -11,6 +11,7 @@ library(htmltools)
 library(lazyeval)
 library(sp)
 library(rgdal)
+library(DT)
 
 # server
 my_server <- function(input, output){
@@ -122,9 +123,10 @@ my_server <- function(input, output){
       a
   })
   
-  ##### Maps ###############################################################################
+  ##### Maps/Table #########################################################################
   states_frame <- geojson_read("USA.json", what = "sp")
   states_frame_all <- sp::merge(states_frame, map_all_industry, by.x = "NAME", by.y = "GeoName")
+  qpal <- colorQuantile("YlOrRd", states_frame_all$X1997, n = 9, na.color = "#bdbdbd")
   
   mdata <- reactive({
     select(map_all_industry, "GeoName", input$year)
@@ -139,7 +141,6 @@ my_server <- function(input, output){
     "<strong>%s</strong><br/>%g Millions",
     states_frame_all$NAME, states_frame_all$X1997
   ) %>% lapply(htmltools::HTML)
-  qpal <- colorQuantile("YlOrRd", states_frame_all$X1997, n = 9, na.color = "#bdbdbd")
   
   output$industry_map <- renderLeaflet({
     leaflet(states_frame_all) %>%
@@ -167,15 +168,13 @@ my_server <- function(input, output){
     ) %>%
     addLegend(pal = qpal, values = ~X1997, opacity = 0.7,
               position = "bottomright",
-              title = "X1997"
+              title = "1997"
     )
     
   })
 
   observe({
     states_frames <- sp::merge(states_frame, mdata(), by.x = "NAME", by.y = "GeoName")
-    #pal <- colorBin("YlOrRd", domain = eval(parse(text = paste0("states_frames$", input$year))), 
-    #                bins = eval(parse(text = paste0("states_frames$", input$year))))
     qpal <- colorQuantile("YlOrRd", eval(parse(text = paste0("states_frames$", input$year))), n = 9,
                           na.color = "#bdbdbd")
     
@@ -210,15 +209,12 @@ my_server <- function(input, output){
         ) %>%
       addLegend(pal = qpal, values = ~eval(parse(text = input$year)), opacity = 0.7,
                 position = "bottomright",
-                title = "2016 <br>"
+                title = substr(input$year, 2, 5)
       )
   })
-
-  observe({
-   # addLegend(pal = pal, values = ~input$year, opacity = 0.7,
-    #          position = "bottomright",
-     #         title = "2016 <br>"
+  
+  output$year_table <- renderDataTable({
+    datatable(mdata(), filter = "top", colnames = c(" State", paste(substr(input$year, 2, 5), "GDP (Mil)")), 
+              option = list(lengthMenu = c(5, 10, 15), pageLength = 5, autoWidth = TRUE))
   })
 }
-
-shinyServer(my_server)
