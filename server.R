@@ -23,7 +23,9 @@ my_server <- function(input, output){
 
   output$answersCA <- renderText({
     if(input$AnswerCA){
-      print("The thriving Silicon Valley area in California and the Greater Seattle area in Washington are likely to be the drivers for this observed phenomenon.")
+      print("The thriving Silicon Valley area in California
+            and the Greater Seattle area in Washington are
+            likely to be the drivers for this observed phenomenon.")
     }
     else{
       print("Answer:")
@@ -32,7 +34,10 @@ my_server <- function(input, output){
 
   output$answersNY <- renderText({
     if(input$AnswerNY){
-      print("The New York Stock Exchange and NASDAQ, both located in New York, could potentially be the main factors that lead Mideast to the greatest Productivity in this field in the U.S..")
+      print("The New York Stock Exchange and NASDAQ, both
+            located in New York, could potentially be the main
+            factors that lead Mideast to the greatest
+            Productivity in this field in the U.S..")
     }
     else{
       print("Answer:")
@@ -41,50 +46,78 @@ my_server <- function(input, output){
 
   output$answersTX <- renderText({
     if(input$AnswerTX){
-      print("Texas' oil mining industry can be the underlying reason for southwest's highest nationwide productivity in natural resource.")
+      print("Texas' oil mining industry can be the underlying reason
+            for southwest's highest nationwide productivity
+            in natural resource.")
     }
     else{
       print("Answer:")
     }
   })
 
-  ##### Bars ###############################################################################
+  # Bars
   output$Bar <- renderPlotly({
    if(input$category == "All industry total"){
      data1 <- all_industry_data[all_industry_data$region %in% input$Region, ]
-     a <- plot_ly(data1, x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
-                  type = "bar", name = "Real Estate, Renting, and Leasing") %>%
-       add_trace(y = ~X.Government.and.government.enterprises, name = "State and local Government") %>%
-       add_trace(y = ~X..Professional.and.business.services, name = "Professional and Business services") %>%
-       add_trace(y = ~X...Finance.and.insurance, name = "Finance & Insurance") %>%
-       add_trace(y = ~X...Health.care.and.social.assistance, name = "Health Care") %>%
-       add_trace(y = ~X...Durable.goods.manufacturing, name = "Durable Manufacturing") %>%
-       add_trace(y = ~X..Retail.trade, name = "Retail") %>%
-       add_trace(y = ~X..Wholesale.trade, name = "Wholesale") %>%
-       add_trace(y = ~X...Nondurable.goods.manufacturing, name = "Nondurable Manufacturing") %>%
-       add_trace(y = ~X..Information, name = "Information") %>%
-       add_trace(y = ~X...Arts..entertainment..and.recreation, name = "Arts & Recreation") %>%
-       add_trace(y = ~X..Construction, name = "Construction") %>%
-       add_trace(y = ~X..Transportation.and.warehousing, name = "Transportation") %>%
-       add_trace(y = ~X...Educational.services, name = "Education") %>%
-       add_trace(y = ~X...Accommodation.and.food.services, name = "Accommodation and food services") %>%
-       add_trace(y = ~X..Other.services..except.government.and.government.enterprises., name = "Others") %>%
-       add_trace(y = ~Natural.resources.and.mining, name = "Natural Resources") %>%
+     a <- plot_ly(data1,
+                  x = ~region,
+                  y = ~X...Real.estate.and.rental.and.leasing,
+                  type = "bar",
+                  name = "Real Estate, Renting, and Leasing") %>%
+       add_trace(y = ~X.Government.and.government.enterprises,
+                 name = "State and local Government") %>%
+       add_trace(y = ~X..Professional.and.business.services,
+                 name = "Professional and Business services") %>%
+       add_trace(y = ~X...Finance.and.insurance,
+                 name = "Finance & Insurance") %>%
+       add_trace(y = ~X...Health.care.and.social.assistance,
+                 name = "Health Care") %>%
+       add_trace(y = ~X...Durable.goods.manufacturing,
+                 name = "Durable Manufacturing") %>%
+       add_trace(y = ~X..Retail.trade,
+                 name = "Retail") %>%
+       add_trace(y = ~X..Wholesale.trade,
+                 name = "Wholesale") %>%
+       add_trace(y = ~X...Nondurable.goods.manufacturing,
+                 name = "Nondurable Manufacturing") %>%
+       add_trace(y = ~X..Information,
+                 name = "Information") %>%
+       add_trace(y = ~X...Arts..entertainment..and.recreation,
+                 name = "Arts & Recreation") %>%
+       add_trace(y = ~X..Construction,
+                 name = "Construction") %>%
+       add_trace(y = ~X..Transportation.and.warehousing,
+                 name = "Transportation") %>%
+       add_trace(y = ~X...Educational.services,
+                 name = "Education") %>%
+       add_trace(y = ~X...Accommodation.and.food.services,
+                 name = "Accommodation and food services") %>%
+       add_trace(y = ~X..Other.services..except.government.and.government.enterprises.,
+                 name = "Others") %>%
+       add_trace(y = ~Natural.resources.and.mining,
+                 name = "Natural Resources") %>%
        add_trace(y = ~X..Utilities, name = "Utilities") %>%
        layout(xaxis = list(title = "Regions"),
               yaxis = list(title = "GDP (In billions USD)"), barmode = "stack")
       a
    }
-
   else if(input$category == "top10"){
     data1 <- all_industry_data[all_industry_data$region %in% input$Region, ]
-    top10_data <- plot_ly(data1, x = ~region, y = ~X...Real.estate.and.rental.and.leasing,
-                          type = "bar", name = "Real Estate, Renting, and Leasing") %>%
-      add_trace(y = ~X.Government.and.government.enterprises, name = "State and local Government") %>%
-      add_trace(y = ~X..Professional.and.business.services, name = "Professional and Business services") %>%
-      add_trace(y = ~X...Finance.and.insurance, name = "Finance & Insurance") %>%
-      add_trace(y = ~X...Health.care.and.social.assistance, name = "Health Care") %>%
-      add_trace(y = ~X...Durable.goods.manufacturing, name = "Durable Manufacturing") %>%
+    top10_data <- plot_ly(data1,
+                          x = ~region,
+                          y = ~X...Real.estate.and.rental.and.leasing,
+                          type = "bar",
+                          name = "Real Estate, Renting, and Leasing") %>%
+      add_trace(y = ~X.Government.and.government.enterprises,
+                name = "State and local Government") %>%
+      add_trace(y = ~X..Professional.and.business.services,
+                name = "Professional and Business services") %>%
+      add_trace(y = ~X...Finance.and.insurance,
+                name = "Finance & Insurance") %>%
+      add_trace(y = ~X...Health.care.and.social.assistance,
+                name = "Health Care") %>%
+      add_trace(y = ~X...Durable.goods.manufacturing,
+                name = "Durable Manufacturing") %>%
       add_trace(y = ~X..Retail.trade, name = "Retail") %>%
       add_trace(y = ~X..Wholesale.trade, name = "Wholesale") %>%
       add_trace(y = ~X...Nondurable.goods.manufacturing, name = "Nondurable Manufacturing") %>%
@@ -95,53 +128,52 @@ my_server <- function(input, output){
   }
 }
 )
-  
-##### Plots ##############################################################################  
+## Plots
   filtered <- reactive({
     t <- filter(trend_data, year >= input$range[1], year <= input$range[2])
     return(t)
   })
-  
   output$trendchart <- plotly::renderPlotly({
-    a <- plot_ly(filtered(), x= ~year, y = ~all_industry_total,
-                name = "National GDP", type = "scatter", mode = "lines+markers") %>%
+    a <- plot_ly(filtered(), x = ~year, y = ~all_industry_total,
+                name = "National GDP",
+                type = "scatter", mode = "lines+markers") %>%
       layout(title = "U.S. GDP Trend",
              xaxis = list(title = "Year", dtick = 1),
               yaxis = list(title = "GDP (in millions)")) %>%
-      add_trace(x= ~year, y = ~information,
+      add_trace(x = ~year, y = ~information,
                 name = "Information", mode = "lines+markers") %>%
-      add_trace(x= ~year, y = ~manufacturing,
+      add_trace(x = ~year, y = ~manufacturing,
                 name = "Manufacturing", mode = "lines+markers") %>%
-      add_trace(x= ~year, y = ~finance_insurance_real_estate_rental_and_leasing,
+      add_trace(x = ~year,
+                y = ~finance_insurance_real_estate_rental_and_leasing,
                 name = "Finance", mode = "lines+markers") %>%
-      add_trace(x= ~year, y = ~educational_services_health_care_and_social_assistance,
+      add_trace(x = ~year,
+                y = ~educational_services_health_care_and_social_assistance,
                 name = "Education", mode = "lines+markers") %>%
-      add_trace(x= ~year, y = ~government_and_government_enterprises,
+      add_trace(x = ~year, y = ~government_and_government_enterprises,
                 name = "Government", mode = "lines+markers") %>%
-      add_trace(x= ~year, y = ~retail_trade,
+      add_trace(x = ~year, y = ~retail_trade,
                 name = "Retail", mode = "lines+markers")
       a
   })
-  
-  ##### Maps/Table #########################################################################
+  # Maps/Table
   states_frame <- geojson_read("USA.json", what = "sp")
-  states_frame_all <- sp::merge(states_frame, map_all_industry, by.x = "NAME", by.y = "GeoName")
-  qpal <- colorQuantile("YlOrRd", states_frame_all$X1997, n = 9, na.color = "#bdbdbd")
-  
+  states_frame_all <- sp::merge(states_frame,
+                                map_all_industry,
+                                by.x = "NAME", by.y = "GeoName")
+  qpal <- colorQuantile("YlOrRd", states_frame_all$X1997,
+                        n = 9, na.color = "#bdbdbd")
   mdata <- reactive({
     select(map_all_industry, "GeoName", input$year)
   })
-  
   output$title <- renderText({
     req(input$year)
     paste0(substring(input$year, 2), " GDP:")
   })
-  
   labels <- sprintf(
     "<strong>%s</strong><br/>%g Millions",
     states_frame_all$NAME, states_frame_all$X1997
   ) %>% lapply(htmltools::HTML)
-  
   output$industry_map <- renderLeaflet({
     leaflet(states_frame_all) %>%
     addTiles() %>%
@@ -170,19 +202,20 @@ my_server <- function(input, output){
               position = "bottomright",
               title = "1997"
     )
-    
   })
-
   observe({
-    states_frames <- sp::merge(states_frame, mdata(), by.x = "NAME", by.y = "GeoName")
-    qpal <- colorQuantile("YlOrRd", eval(parse(text = paste0("states_frames$", input$year))), n = 9,
+    states_frames <- sp::merge(states_frame, mdata(),
+                               by.x = "NAME", by.y = "GeoName")
+    qpal <- colorQuantile("YlOrRd",
+                          eval(parse(text = paste0("states_frames$",
+                                                   input$year))), n = 9,
                           na.color = "#bdbdbd")
     
     labels <- sprintf(
       "<strong>%s</strong><br/>%g Millions",
-      states_frames$NAME, eval(parse(text = paste0("states_frames$", input$year)))
+      states_frames$NAME,
+      eval(parse(text = paste0("states_frames$", input$year)))
     ) %>% lapply(htmltools::HTML)
-    
     leafletProxy("industry_map", data = states_frames) %>%
       addTiles() %>%
       clearShapes() %>%
@@ -207,14 +240,17 @@ my_server <- function(input, output){
           textsize = "15px",
           direction = "auto")
         ) %>%
-      addLegend(pal = qpal, values = ~eval(parse(text = input$year)), opacity = 0.7,
+      addLegend(pal = qpal,
+                values = ~eval(parse(text = input$year)), opacity = 0.7,
                 position = "bottomright",
                 title = substr(input$year, 2, 5)
       )
   })
-  
   output$year_table <- renderDataTable({
-    datatable(mdata(), filter = "top", colnames = c(" State", paste(substr(input$year, 2, 5), "GDP (Mil)")), 
-              option = list(lengthMenu = c(5, 10, 15), pageLength = 5, autoWidth = TRUE))
+    datatable(mdata(), filter = "top",
+              colnames = c(" State",
+                           paste(substr(input$year, 2, 5), "GDP (Mil)")),
+              option = list(lengthMenu = c(5, 10, 15),
+                            pageLength = 5, autoWidth = TRUE))
   })
 }
