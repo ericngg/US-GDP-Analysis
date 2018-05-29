@@ -60,11 +60,11 @@ choice_region <- c("New England (CT, ME, MA, NH, RI, VT)" = "New England",
                    "Southeast (AB, AK, FL, GA, KY, LA, MS, NC, SC, TN, VA, WV)" = "Southeast",
                    "Southwest (AZ, NM, OK, TX)" = "Southwest",
                    "Rocky Mountain (CO, ID, MT, UT, WY)" = "Rocky Mountain",
-                   "Far West (AL, CA, HI, NV, OR, WA)" = "Far West")  
+                   "Far West (AL, CA, HI, NV, OR, WA)" = "Far West")
 
 all_industry_data <- data.frame(Geo, public_filter("  Utilities"),
                                 public_filter("  Construction"),
-                                public_filter("   Nondurable goods manufacturing"), 
+                                public_filter("   Nondurable goods manufacturing"),
                                 public_filter("   Durable goods manufacturing"),
                                 public_filter("  Wholesale trade"),
                                 public_filter("  Retail trade"),
