@@ -5,8 +5,8 @@ account: ryanpchiu
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 350856
-bundleId: 1399484
+bundleId: 1399520
 url: https://ryanpchiu.shinyapps.io/Final-Project-INFO201/
-when: 1527639007.00657
+when: 1527642651.50233
 asMultiple: FALSE
 asStatic: FALSE
