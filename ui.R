@@ -11,6 +11,7 @@ library(geojsonio)
 library(RColorBrewer)
 library(htmltools)
 library(lazyeval)
+library(DT)
 
 #Source file
 source("regional_2017.R")

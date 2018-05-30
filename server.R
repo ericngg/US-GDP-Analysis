@@ -247,7 +247,7 @@ my_server <- function(input, output){
                 title = substr(input$year, 2, 5)
       )
   })
-  output$year_table <- renderDataTable({
+  output$year_table <- DT::renderDataTable({
     datatable(mdata(), filter = "top",
               colnames = c(" State",
                            paste(substr(input$year, 2, 5), "GDP (Mil)")),
