@@ -120,7 +120,7 @@ shinyUI(navbarPage(
                                choices = years_choice_map,
                                selected = "1997"),
                    uiOutput("year"),
-                   width = 3,
+                   width = 4,
                    tags$br(),
                    tags$div(
                      tags$p("Map and data of the GDP for a specified
