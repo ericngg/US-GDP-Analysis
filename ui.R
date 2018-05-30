@@ -21,6 +21,7 @@ shinyUI(navbarPage(
   theme = shinytheme("cosmo"),
   tags$div(class = "header", checked = NA,
            tags$p("U.S. Overall GDP Analysis")),
+  windowTitle = "U.S. Overall GDP Analysis",
            # Panel 1 -Andrew
            tabPanel(
             titlePanel(tags$div(class = "title", checked = NA,
