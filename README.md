@@ -1,4 +1,4 @@
-# Final-Project-Info201
+# US GDP Analysis
 Finalized Work:
 https://ryanpchiu.shinyapps.io/Final-Project-INFO201/
 
